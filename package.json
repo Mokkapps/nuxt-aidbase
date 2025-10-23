@@ -1,6 +1,6 @@
 {
   "name": "nuxt-aidbase",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Nuxt module for Aidbase integration",
   "repository": "Mokkapps/nuxt-aidbase",
   "license": "MIT",
