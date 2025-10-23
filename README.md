@@ -25,6 +25,26 @@ npx nuxi module add nuxt-aidbase
 
 That's it! You can now use Nuxt Aidbase in your Nuxt app ✨
 
+### Module options / configuration
+
+Add configuration to your `nuxt.config` under the `aidbase` key. Example:
+
+```ts
+export default defineNuxtConfig({
+  aidbase: {
+    // ID of the Aidbase FAQ knowledge base to use for `/api/aidbase/faq`
+    faqKnowledgeId: 'your-faq-knowledge-id',
+  },
+})
+```
+
+Important environment variables:
+
+- `NUXT_PRIVATE_AIDBASE_API_TOKEN` (required) — Your Aidbase API token. The module will log an error at setup if this is not set and the server endpoints that require it will return an error.
+- `NUXT_PRIVATE_AIDBASE_FAQ_CACHE_MAX_AGE` (optional) — Cache TTL (in seconds) for the FAQ endpoint in production. Defaults to `3600`.
+
+Security note: The API token must be stored in a private server-only env var (the module reads it via `process.env.NUXT_PRIVATE_AIDBASE_API_TOKEN` and exposes it to server runtime config only).
+
 ## Usage
 
 ### Component: `AidbaseChatbot`
@@ -84,26 +104,6 @@ Example response:
 Errors:
 - If the API token is missing, the endpoint returns HTTP 500 with message: `Aidbase API token is not configured.`
 - If the FAQ knowledge id is missing, the endpoint returns HTTP 500 with message: `Aidbase FAQ knowledge ID is not configured.`
-
-### Module options / configuration
-
-Add configuration to your `nuxt.config` under the `aidbase` key. Example:
-
-```ts
-export default defineNuxtConfig({
-  aidbase: {
-    // ID of the Aidbase FAQ knowledge base to use for `/api/aidbase/faq`
-    faqKnowledgeId: 'your-faq-knowledge-id',
-  },
-})
-```
-
-Important environment variables:
-
-- `NUXT_PRIVATE_AIDBASE_API_TOKEN` (required) — Your Aidbase API token. The module will log an error at setup if this is not set and the server endpoints that require it will return an error.
-- `NUXT_PRIVATE_AIDBASE_FAQ_CACHE_MAX_AGE` (optional) — Cache TTL (in seconds) for the FAQ endpoint in production. Defaults to `3600`.
-
-Security note: The API token must be stored in a private server-only env var (the module reads it via `process.env.NUXT_PRIVATE_AIDBASE_API_TOKEN` and exposes it to server runtime config only).
 
 ## Contribution
 
